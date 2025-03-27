@@ -79,11 +79,6 @@ gradlePlugin {
             implementationClass =
                 "team.capybara.moime.buildlogic.convention.SpotlessConventionPlugin"
         }
-        register("dependencyGraph") {
-            id = "moime.convention.dependencyGraph"
-            implementationClass =
-                "team.capybara.moime.buildlogic.convention.DependencyGraphPlugin"
-        }
         register("detekt") {
             id = "moime.convention.detekt"
             implementationClass = "team.capybara.moime.buildlogic.convention.DetektPlugin"

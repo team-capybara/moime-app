@@ -47,7 +47,6 @@ desugar = "2.1.4"
 ktlint = "0.50.0"
 spotless = "7.0.1"
 detekt = "1.23.7"
-dependencyGraphGenerator = "0.8.0"
 
 [libraries]
 coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
@@ -114,7 +113,6 @@ composeCompilerGradlePlugin = { group = "org.jetbrains.kotlin", name = "compose-
 composeGradlePlugin = { group = "org.jetbrains.compose", name = "compose-gradle-plugin", version.ref = "compose-multiplatform" }
 spotlessGradlePlugin = { module = "com.diffplug.spotless:spotless-plugin-gradle", version.ref = "spotless" }
 detektGradlePlugin = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
-dependencyGraphPlugin = { module = "com.vanniktech:gradle-dependency-graph-generator-plugin", version.ref = "dependencyGraphGenerator" }
 
 [bundles]
 voyager = [
@@ -142,8 +140,7 @@ plugins = [
     "composeCompilerGradlePlugin",
     "composeGradlePlugin",
     "spotlessGradlePlugin",
-    "detektGradlePlugin",
-    "dependencyGraphPlugin"
+    "detektGradlePlugin"
 ]
 
 [plugins]
@@ -157,4 +154,3 @@ kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", versio
 googleServices = { id = "com.google.gms.google-services", version.ref = "gms" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
-dependencyGraph = { id = "com.vanniktech.dependency.graph.generator", version.ref = "dependencyGraphGenerator" }
