@@ -9,7 +9,6 @@ class BaseConventionPlugin : Plugin<Project> {
         with(target) {
             with(pluginManager) {
                 apply(SpotlessPlugin::class.java)
-                apply(DependencyGraphPlugin::class.java)
             }
         }
     }
