@@ -16,7 +16,12 @@
 
 package team.capybara.moime.core.model
 
+import kotlinx.serialization.Serializable
+import team.capybara.moime.core.common.util.UriSerializer
+
+@Serializable
 data class Participant(
     val id: Long,
+    @Serializable(with = UriSerializer::class)
     val profileImageUrl: String
-) : JavaSerializable
+)

@@ -20,7 +20,9 @@ import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class Meeting(
     val id: Long,
     val title: String,
@@ -30,8 +32,7 @@ data class Meeting(
     val location: Location,
     val participants: List<Participant>,
     val thumbnailUrl: String? = null
-) : JavaSerializable {
-
+) {
     val isActive
         get() = status == Status.Ongoing || startDateTime.isToday && status != Status.Completed
 
@@ -42,6 +43,7 @@ data class Meeting(
         get() = finishDateTimeString?.let { LocalDateTime.parse(it) }
 
     enum class Status(val value: String) {
+        New("NEW"),
         Created("CREATED"),
         Ongoing("ONGOING"),
         Finished("FINISHED"),

@@ -15,10 +15,11 @@ kotlin {
             dependencies {
                 api(projects.core.designsystem)
                 implementation(projects.core.common)
+                implementation(projects.core.model)
 
                 implementation(libs.kotlinx.datetime)
-
-                implementation(libs.bundles.voyager)
+                
+                implementation(libs.navigation.compose)
 
                 implementation(libs.filekit.core)
                 implementation(libs.filekit.compose)

@@ -37,7 +37,7 @@ class MainActivity : ComponentActivity() {
         ShareUtil.setActivityProvider { return@setActivityProvider this }
         FileKit.init(this)
         setContent {
-            App()
+            MoimeApp()
         }
     }
 
@@ -49,13 +49,13 @@ class MainActivity : ComponentActivity() {
     private fun setSystemBarStyle() {
         enableEdgeToEdge(
             statusBarStyle =
-                SystemBarStyle.dark(
-                    Color.TRANSPARENT,
-                ),
+            SystemBarStyle.dark(
+                Color.TRANSPARENT,
+            ),
             navigationBarStyle =
-                SystemBarStyle.dark(
-                    Color.TRANSPARENT,
-                ),
+            SystemBarStyle.dark(
+                Color.TRANSPARENT,
+            ),
         )
     }
 

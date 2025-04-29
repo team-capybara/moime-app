@@ -16,8 +16,11 @@
 
 package team.capybara.moime.core.model
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Location(
     val name: String,
     val lat: Float,
     val lng: Float
-) : JavaSerializable
+)

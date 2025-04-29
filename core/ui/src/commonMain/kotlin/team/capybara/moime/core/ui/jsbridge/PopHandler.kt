@@ -19,6 +19,8 @@ package team.capybara.moime.core.ui.jsbridge
 import com.multiplatform.webview.jsbridge.IJsMessageHandler
 import com.multiplatform.webview.jsbridge.JsMessage
 import com.multiplatform.webview.web.WebViewNavigator
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 
 class PopHandler(
     private val onPop: () -> Unit
@@ -29,7 +31,10 @@ class PopHandler(
         navigator: WebViewNavigator?,
         callback: (String) -> Unit
     ) {
-        onPop()
+        // navigation method should be called on main thread
+        MainScope().launch {
+            onPop()
+        }
     }
 
     override fun methodName(): String = METHOD_NAME

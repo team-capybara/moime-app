@@ -19,10 +19,8 @@ package team.capybara.moime.core.ui.component
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.Modifier
-import cafe.adriel.voyager.core.annotation.InternalVoyagerApi
-import cafe.adriel.voyager.navigator.internal.BackHandler
 import com.multiplatform.webview.jsbridge.IJsMessageHandler
 import com.multiplatform.webview.jsbridge.rememberWebViewJsBridge
 import com.multiplatform.webview.web.WebView
@@ -32,7 +30,6 @@ import team.capybara.moime.core.designsystem.component.MoimeLoading
 import team.capybara.moime.core.designsystem.theme.Gray700
 import team.capybara.moime.core.ui.jsbridge.AccessTokenHandler
 
-@OptIn(InternalVoyagerApi::class)
 @Composable
 fun MoimeWebView(
     url: String,
@@ -44,15 +41,14 @@ fun MoimeWebView(
     val webViewState = rememberWebViewState(url)
     val jsBridge = rememberWebViewJsBridge(webViewNavigator)
 
-    LaunchedEffect(jsBridge) {
+    DisposableEffect(jsBridge) {
         with(jsBridge) {
             jsMessageHandlers.forEach { register(it) }
             register(AccessTokenHandler())
         }
-    }
-
-    onDispose?.let {
-        BackHandler(webViewNavigator.canGoBack.not(), it)
+        onDispose {
+            onDispose?.let { it() }
+        }
     }
 
     SafeAreaColumn {
