@@ -74,14 +74,9 @@ gradlePlugin {
             id = "moime.convention.google.services"
             implementationClass = "team.capybara.moime.buildlogic.convention.GoogleServicesPlugin"
         }
-        register("spotless") {
-            id = "moime.convention.spotless"
-            implementationClass =
-                "team.capybara.moime.buildlogic.convention.SpotlessConventionPlugin"
-        }
-        register("detekt") {
-            id = "moime.convention.detekt"
-            implementationClass = "team.capybara.moime.buildlogic.convention.DetektPlugin"
+        register("kmpFeature") {
+            id = "moime.convention.kmp.feature"
+            implementationClass = "team.capybara.moime.buildlogic.convention.KmpFeaturePlugin"
         }
     }
 }

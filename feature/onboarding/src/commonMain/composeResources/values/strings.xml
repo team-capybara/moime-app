@@ -1,0 +1,7 @@
+<resources>
+    <string name="start">시작하기</string>
+    <string name="onboarding_desc_1">모임 약속을 잡아요</string>
+    <string name="onboarding_desc_2">함께한 순간을\n바로 사진에 담아요</string>
+    <string name="onboarding_desc_3">모임이 끝나면\n하이라이트가 만들어져요</string>
+    <string name="onboarding_desc_4">모임이 모이면\n인사이트가 생겨요</string>
+</resources>

@@ -9,6 +9,7 @@ plugins {
     id("moime.convention.kmp.ios")
     id("moime.convention.android.application")
     id("moime.convention.google.services")
+    id("moime.convention.kotlin.serialization")
 }
 
 android.namespace = "team.capybara.moime.app"
@@ -34,8 +35,20 @@ kotlin {
             implementation(projects.core.common)
             implementation(projects.core.data)
             implementation(projects.core.network)
-            implementation(projects.feature)
+            implementation(projects.core.model)
+            implementation(projects.feature.main)
+            implementation(projects.feature.home)
+            implementation(projects.feature.insight)
+            implementation(projects.feature.login)
+            implementation(projects.feature.splash)
+            implementation(projects.feature.onboarding)
+            implementation(projects.feature.camera)
+            implementation(projects.feature.friend)
+            implementation(projects.feature.meeting)
+            implementation(projects.feature.mypage)
+            implementation(projects.feature.notification)
 
+            implementation(libs.navigation.compose)
             implementation(libs.koin.core)
 
             implementation(libs.coil.compose)
@@ -51,7 +64,6 @@ kotlin {
         }
         androidMain.dependencies {
             implementation(libs.androidx.activity.compose)
-            implementation(libs.androidx.lifecycle.compose)
             implementation(libs.koin.androidx.compose)
         }
     }

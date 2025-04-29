@@ -1,0 +1,16 @@
+plugins {
+    id("moime.convention.base")
+    id("moime.convention.kmp.feature")
+}
+
+android.namespace = "team.capybara.moime.feature.meeting"
+
+kotlin {
+    sourceSets {
+        commonMain.dependencies {
+            implementation(libs.webview.multiplatform)
+
+            implementation(libs.filekit.core)
+        }
+    }
+}
