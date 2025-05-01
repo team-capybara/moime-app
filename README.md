@@ -12,7 +12,6 @@
 <img src="https://img.shields.io/badge/platform-android-green.svg"/>
 <img src="https://img.shields.io/badge/platform-iOS-black.svg"/>
 </p>
-</p>
 
 <p align="center">
   <img width="80%" src="https://github.com/user-attachments/assets/0c9af158-3214-4604-aac5-abc56b7795ab" />
@@ -25,6 +24,7 @@
 <br>
 
 # Key Features ✨
+
 - 모임 일정 예약 및 공유
 - 실시간 사진 촬영 및 공유
 - 자동 추억 생성 및 추억 이미지 다운로드
@@ -33,6 +33,7 @@
 <br>
 
 # Stacks 🔧
+
 - Kotlin Multiplatform (JVM/Native)
 - Compose Multiplatform
 - Multi Modules
@@ -45,7 +46,14 @@
 
 <br>
 
+# Modularization 🔍
+
+![modules](https://github.com/user-attachments/assets/9bfdd83e-b5a8-4278-b949-18bf27b21302)
+
+<br>
+
 # Release 🎉
+
 <a href='https://play.google.com/store/apps/details?id=team.capybara.moime&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img width="20%" alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
 <br>
 <img width="18%" src="https://github.com/user-attachments/assets/fe898348-9bb4-4a14-bef9-15c726a64d3c"/>
