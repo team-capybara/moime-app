@@ -38,7 +38,7 @@ import moime.feature.friend.generated.resources.friend_added
 import moime.feature.friend.generated.resources.friend_added_desc
 import org.jetbrains.compose.resources.getString
 import team.capybara.moime.core.common.model.CursorData
-import team.capybara.moime.core.data.repository.FriendRepository
+import team.capybara.moime.core.data.repository.api.FriendRepository
 import team.capybara.moime.core.designsystem.component.DialogRequest
 import team.capybara.moime.core.model.Friend
 import team.capybara.moime.feature.friend.navigation.FriendRoute

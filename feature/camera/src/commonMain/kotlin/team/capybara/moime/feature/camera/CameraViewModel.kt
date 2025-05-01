@@ -33,7 +33,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import team.capybara.moime.core.data.repository.CameraRepository
+import team.capybara.moime.core.data.repository.api.CameraRepository
 import team.capybara.moime.core.ui.util.ResizeOptions
 import team.capybara.moime.core.ui.util.resize
 import team.capybara.moime.core.ui.util.toImageBitmap

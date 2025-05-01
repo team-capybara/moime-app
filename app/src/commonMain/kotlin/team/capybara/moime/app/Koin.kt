@@ -18,9 +18,10 @@ package team.capybara.moime.app
 
 import org.koin.core.context.startKoin
 import team.capybara.moime.core.common.di.tokenModule
+import team.capybara.moime.core.data.di.repositoryModule
+import team.capybara.moime.core.data.di.settingsModule
+import team.capybara.moime.data.network.di.dataSourceModule
 import team.capybara.moime.data.network.di.networkModule
-import team.capybara.moime.data.network.di.repositoryModule
-import team.capybara.moime.data.network.di.settingsModule
 import team.capybara.moime.feature.friend.di.friendViewModelModule
 import team.capybara.moime.feature.home.di.homeViewModelModule
 import team.capybara.moime.feature.insight.di.insightViewModelModule
@@ -39,4 +40,5 @@ fun initKoin() = startKoin {
     modules(loginViewModelModule)
     modules(friendViewModelModule)
     modules(repositoryModule)
+    modules(dataSourceModule)
 }

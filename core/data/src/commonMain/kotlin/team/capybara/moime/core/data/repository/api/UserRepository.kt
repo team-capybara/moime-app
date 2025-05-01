@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package team.capybara.moime.core.data.repository
+package team.capybara.moime.core.data.repository.api
 
 import team.capybara.moime.core.model.User
 

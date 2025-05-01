@@ -14,11 +14,18 @@
  * limitations under the License.
  */
 
-package team.capybara.moime.data.network.di
+package team.capybara.moime.core.data.repository.impl
 
-import com.russhwolf.settings.Settings
-import org.koin.dsl.module
+import team.capybara.moime.core.data.repository.api.InsightRepository
+import team.capybara.moime.data.network.MoimeNetworkDataSource
 
-val settingsModule = module {
-    single { Settings() }
+internal class DefaultInsightRepository(
+    private val dataSource: MoimeNetworkDataSource
+) : InsightRepository {
+
+    override suspend fun getInsightSummary() = dataSource.getInsightSummary()
+
+    override suspend fun getSurvey() = dataSource.getSurvey()
+
+    override suspend fun postSurvey() = dataSource.postSurvey()
 }

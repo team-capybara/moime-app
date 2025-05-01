@@ -14,24 +14,24 @@
  * limitations under the License.
  */
 
-package team.capybara.moime.data.network.di
+package team.capybara.moime.core.data.di
 
 import org.koin.dsl.module
-import team.capybara.moime.core.data.repository.CameraRepository
-import team.capybara.moime.core.data.repository.FriendRepository
-import team.capybara.moime.core.data.repository.InsightRepository
-import team.capybara.moime.core.data.repository.MeetingRepository
-import team.capybara.moime.core.data.repository.NotificationRepository
-import team.capybara.moime.core.data.repository.UserRepository
-import team.capybara.moime.data.network.repository.DefaultCameraRepository
-import team.capybara.moime.data.network.repository.DefaultFriendRepository
-import team.capybara.moime.data.network.repository.DefaultInsightRepository
-import team.capybara.moime.data.network.repository.DefaultMeetingRepository
-import team.capybara.moime.data.network.repository.DefaultNotificationRepository
-import team.capybara.moime.data.network.repository.DefaultUserRepository
+import team.capybara.moime.core.data.repository.api.CameraRepository
+import team.capybara.moime.core.data.repository.api.FriendRepository
+import team.capybara.moime.core.data.repository.api.InsightRepository
+import team.capybara.moime.core.data.repository.api.MeetingRepository
+import team.capybara.moime.core.data.repository.api.NotificationRepository
+import team.capybara.moime.core.data.repository.api.UserRepository
+import team.capybara.moime.core.data.repository.impl.DefaultCameraRepository
+import team.capybara.moime.core.data.repository.impl.DefaultFriendRepository
+import team.capybara.moime.core.data.repository.impl.DefaultInsightRepository
+import team.capybara.moime.core.data.repository.impl.DefaultMeetingRepository
+import team.capybara.moime.core.data.repository.impl.DefaultNotificationRepository
+import team.capybara.moime.core.data.repository.impl.DefaultUserRepository
 
 val repositoryModule = module {
-    single<UserRepository> { DefaultUserRepository(get(), get(), get()) }
+    single<UserRepository> { DefaultUserRepository(get()) }
     single<MeetingRepository> { DefaultMeetingRepository(get()) }
     single<FriendRepository> { DefaultFriendRepository(get()) }
     single<CameraRepository> { DefaultCameraRepository(get()) }
