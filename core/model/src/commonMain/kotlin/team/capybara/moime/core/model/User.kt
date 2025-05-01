@@ -17,7 +17,6 @@
 package team.capybara.moime.core.model
 
 import kotlinx.serialization.Serializable
-import team.capybara.moime.core.common.util.UriSerializer
 
 @Serializable
 data class User(
@@ -26,6 +25,5 @@ data class User(
     val nickname: String,
     val email: String,
     val providerType: ProviderType,
-    @Serializable(with = UriSerializer::class)
     val profileImageUrl: String
 )
