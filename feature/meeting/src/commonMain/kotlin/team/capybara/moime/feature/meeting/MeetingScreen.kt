@@ -17,12 +17,6 @@
 package team.capybara.moime.feature.meeting
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.snapshotFlow
-import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.filter
 import team.capybara.moime.core.ui.component.MoimeWebView
 import team.capybara.moime.core.ui.jsbridge.FriendDetailNavigationHandler
 import team.capybara.moime.core.ui.jsbridge.PopHandler
@@ -30,23 +24,10 @@ import team.capybara.moime.core.ui.jsbridge.PopHandler
 @Composable
 internal fun MeetingScreen(
     viewModel: MeetingViewModel,
-    onNavigateToCamera: (Long) -> Unit,
     onRefreshMeetingList: () -> Unit,
     onNavigateToFriendDetail: (Long) -> Unit,
     onNavigateToBack: () -> Unit
 ) {
-    val uiState by viewModel.uiState.collectAsState()
-
-    LaunchedEffect(uiState) {
-        snapshotFlow { uiState }
-            .distinctUntilChanged()
-            .filter { it is MeetingState.Camera }
-            .collect {
-                onNavigateToCamera((it as MeetingState.Camera).meetingId)
-                viewModel.reset()
-            }
-    }
-
     val popHandler = PopHandler { onNavigateToBack() }
     val friendDetailNavigationHandler = FriendDetailNavigationHandler {
         onNavigateToFriendDetail(it)

@@ -22,10 +22,7 @@ import com.multiplatform.webview.jsbridge.IJsMessageHandler
 import com.multiplatform.webview.jsbridge.JsMessage
 import com.multiplatform.webview.web.WebViewNavigator
 import io.github.vinceglb.filekit.core.FileKit
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDateTime
 import team.capybara.moime.core.common.util.DateUtil.now
@@ -36,11 +33,9 @@ import team.capybara.moime.core.ui.jsbridge.WEB_VIEW_BASE_URL
 import team.capybara.moime.feature.meeting.navigation.MeetingRoute
 
 internal class MeetingViewModel(
-    private val meetingRoute: MeetingRoute
+    private val meetingRoute: MeetingRoute,
+    private val onNavigateToCamera: () -> Unit
 ) : ViewModel() {
-
-    private val _uiState = MutableStateFlow<MeetingState>(MeetingState.Default)
-    val uiState: StateFlow<MeetingState> = _uiState.asStateFlow()
 
     val webViewUrl = WEB_VIEW_BASE_URL + when (meetingRoute.status) {
         Meeting.Status.New -> NEW_MEETING_URL
@@ -64,10 +59,6 @@ internal class MeetingViewModel(
         }
     )
 
-    fun reset() {
-        _uiState.update { MeetingState.Default }
-    }
-
     inner class CameraJsMessageHandler : IJsMessageHandler {
 
         override fun handle(
@@ -75,7 +66,9 @@ internal class MeetingViewModel(
             navigator: WebViewNavigator?,
             callback: (String) -> Unit
         ) {
-            _uiState.update { _ -> MeetingState.Camera(meetingRoute.id) }
+            MainScope().launch {
+                onNavigateToCamera()
+            }
         }
 
         override fun methodName(): String = BRIDGE_CAMERA_NAVIGATION_METHOD_NAME

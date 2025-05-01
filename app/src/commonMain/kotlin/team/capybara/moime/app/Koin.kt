@@ -26,7 +26,6 @@ import team.capybara.moime.feature.home.di.homeViewModelModule
 import team.capybara.moime.feature.insight.di.insightViewModelModule
 import team.capybara.moime.feature.login.di.loginViewModelModule
 import team.capybara.moime.feature.main.di.mainViewModelModule
-import team.capybara.moime.feature.meeting.di.meetingViewModelModule
 import team.capybara.moime.feature.splash.di.splashViewModelModule
 
 fun initKoin() = startKoin {
@@ -39,6 +38,5 @@ fun initKoin() = startKoin {
     modules(insightViewModelModule)
     modules(loginViewModelModule)
     modules(friendViewModelModule)
-    modules(meetingViewModelModule)
     modules(repositoryModule)
 }
