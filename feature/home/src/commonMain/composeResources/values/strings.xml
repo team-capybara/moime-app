@@ -1,0 +1,7 @@
+<resources>
+    <string name="home_tab_list_view">리스트 뷰</string>
+    <string name="home_tab_calendar_view">캘린더 뷰</string>
+
+    <string name="empty_meetings">모임이 없어요</string>
+    <string name="empty_meetings_desc">새로운 모임을 만들어보세요</string>
+</resources>

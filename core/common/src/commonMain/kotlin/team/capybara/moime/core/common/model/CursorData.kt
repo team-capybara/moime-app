@@ -1,0 +1,42 @@
+/*
+ * Copyright 2025 Yeojun Yoon
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package team.capybara.moime.core.common.model
+
+import kotlinx.datetime.LocalDateTime
+import team.capybara.moime.core.common.model.CursorRequest.Companion.DEFAULT_LIMIT
+
+data class CursorData<T>(
+    val data: List<T> = emptyList(),
+    val isLoading: Boolean = false,
+    val nextCursorId: Int? = null,
+    val nextCursorDate: LocalDateTime? = null,
+    val isLast: Boolean? = null
+) {
+    fun canRequest() = !isLoading && isLast != true
+
+    fun nextRequest(limit: Int = DEFAULT_LIMIT) = CursorRequest(nextCursorId, nextCursorDate, limit)
+
+    fun loading(value: Boolean = true) = copy(isLoading = value)
+
+    fun concatenate(next: CursorData<T>, reverse: Boolean = false) = copy(
+        data = if (reverse) next.data + data else data + next.data,
+        isLoading = false,
+        nextCursorId = next.nextCursorId,
+        nextCursorDate = next.nextCursorDate,
+        isLast = next.isLast
+    )
+}

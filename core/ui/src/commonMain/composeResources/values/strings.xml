@@ -1,0 +1,5 @@
+<resources>
+    <string name="from_start">시작한지</string>
+    <string name="to_start">시작까지</string>
+    <string name="to_complete">투표 종료까지</string>"
+</resources>

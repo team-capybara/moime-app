@@ -1,0 +1,10 @@
+<resources>
+    <string name="uploading_photo">사진 업로드 중</string>
+    <string name="upload_done">업로드 완료!</string>
+    <string name="upload_failure">업로드 실패</string>
+    <string name="failed_to_capture">사진 촬영 중 오류가 발생했습니다</string>
+    <string name="loading_location">위치 정보를 설정 중입니다</string>
+    <string name="failed_to_get_location">위치 정보를 가져올 수 없습니다</string>
+    <string name="camera_permission_denied">카메라 접근 권한이 필요해요</string>
+    <string name="camera_permission_help">기기에서 직접 모이미 앱의 카메라 권한을 재설정해주세요</string>
+</resources>

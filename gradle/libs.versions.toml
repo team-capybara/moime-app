@@ -1,0 +1,172 @@
+[versions]
+compileSdk = "35"
+targetSdk = "35"
+minSdk = "26"
+versionCode = "6"
+versionName = "2.0.1"
+
+agp = "8.5.2"
+kotlin = "2.0.10"
+coroutines = "1.8.1"
+
+kotlinx-datetime = "0.6.1"
+kotlinx-serialization = "1.7.1"
+
+androidx-activityCompose = "1.9.2"
+androidx-lifecycleCompose = "2.8.5"
+
+compose-multiplatform = "1.7.1"
+navigation-compose = "2.8.0-alpha13"
+viewmodel-compose = "2.8.4"
+
+koin = "4.0.4"
+ktor = "3.0.1"
+logback = "1.3.14"
+
+voyager = "1.1.0-beta02"
+
+moko-permissions = "0.18.0"
+moko-geo = "0.7.0"
+
+webview = "1.9.40-alpha03"
+settings = "1.1.1"
+
+gms = "4.4.2"
+kmpnotifier = "0.6.0"
+stately = "2.0.7"
+
+coil = "3.0.3"
+haze = "0.7.2"
+calendar = "1.0.1"
+pullrefresh = "1.4.0-beta03"
+kim = "0.18.4"
+filekit = "0.8.1"
+accompanist = "0.34.0"
+camerax = "1.3.2"
+
+desugar = "2.1.4"
+
+ktlint = "0.50.0"
+spotless = "7.0.1"
+detekt = "1.23.7"
+jetbrainsKotlinJvm = "1.9.22"
+
+[libraries]
+coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
+coroutines-guava = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-guava", version.ref = "coroutines" }
+
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
+androidx-lifecycle-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidx-lifecycleCompose" }
+navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigation-compose" }
+viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "viewmodel-compose" }
+
+android-desugar = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugar" }
+
+kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinx-datetime" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+
+koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
+koin-compose = { group = "io.insert-koin", name = "koin-compose", version.ref = "koin" }
+koin-compose-viewmodel = { group = "io.insert-koin", name = "koin-compose-viewmodel", version.ref = "koin" }
+koin-compose-viewmodel-navigation = { group = "io.insert-koin", name = "koin-compose-viewmodel-navigation", version.ref = "koin" }
+koin-androidx-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin" }
+
+ktor-client = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
+ktor-client-android = { group = "io.ktor", name = "ktor-client-android", version.ref = "ktor" }
+ktor-client-darwin = { group = "io.ktor", name = "ktor-client-darwin", version.ref = "ktor" }
+ktor-client-auth = { group = "io.ktor", name = "ktor-client-auth", version.ref = "ktor" }
+ktor-logging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "ktor" }
+ktor-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-serialization-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }
+logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
+
+voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
+voyager-screenModel = { module = "cafe.adriel.voyager:voyager-screenmodel", version.ref = "voyager" }
+voyager-tabNavigator = { module = "cafe.adriel.voyager:voyager-tab-navigator", version.ref = "voyager" }
+voyager-transitions = { module = "cafe.adriel.voyager:voyager-transitions", version.ref = "voyager" }
+voyager-lifecycle-kmp = { module = "cafe.adriel.voyager:voyager-lifecycle-kmp", version.ref = "voyager" }
+voyager-koin = { module = "cafe.adriel.voyager:voyager-koin", version.ref = "voyager" }
+
+moko-permissions-core = { group = "dev.icerock.moko", name = "permissions", version.ref = "moko-permissions" }
+moko-permissions-compose = { group = "dev.icerock.moko", name = "permissions-compose", version.ref = "moko-permissions" }
+moko-geo = { group = "dev.icerock.moko", name = "geo", version.ref = "moko-geo" }
+moko-geo-compose = { group = "dev.icerock.moko", name = "geo-compose", version.ref = "moko-geo" }
+
+coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil" }
+coil-ktor = { group = "io.coil-kt.coil3", name = "coil-network-ktor3", version.ref = "coil" }
+
+settings = { module = "com.russhwolf:multiplatform-settings", version.ref = "settings" }
+settings-noarg = { module = "com.russhwolf:multiplatform-settings-no-arg", version.ref = "settings" }
+
+filekit-core = { group = "io.github.vinceglb", name = "filekit-core", version.ref = "filekit" }
+filekit-compose = { group = "io.github.vinceglb", name = "filekit-compose", version.ref = "filekit" }
+
+kmpnotifier = { module = "io.github.mirzemehdi:kmpnotifier", version.ref = "kmpnotifier" }
+stately-common = { module = "co.touchlab:stately-common", version.ref = "stately" }
+
+webview-multiplatform = { module = "io.github.kevinnzou:compose-webview-multiplatform", version.ref = "webview" }
+haze = { module = "dev.chrisbanes.haze:haze", version.ref = "haze" }
+calendar = { module = "io.github.wojciechosak:calendar", version.ref = "calendar" }
+pullrefresh = { module = "dev.materii.pullrefresh:pullrefresh", version.ref = "pullrefresh" }
+kim = { module = "com.ashampoo:kim", version.ref = "kim" }
+accompanist-permissions = { group = "com.google.accompanist", name = "accompanist-permissions", version.ref = "accompanist" }
+camera-camera2 = { group = "androidx.camera", name = "camera-camera2", version.ref = "camerax" }
+camera-lifecycle = { group = "androidx.camera", name = "camera-lifecycle", version.ref = "camerax" }
+camera-view = { group = "androidx.camera", name = "camera-view", version.ref = "camerax" }
+
+androidGradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
+kotlinGradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+kotlinxSerializationGradlePlugin = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
+composeCompilerGradlePlugin = { group = "org.jetbrains.kotlin", name = "compose-compiler-gradle-plugin", version.ref = "kotlin" }
+composeGradlePlugin = { group = "org.jetbrains.compose", name = "compose-gradle-plugin", version.ref = "compose-multiplatform" }
+spotlessGradlePlugin = { module = "com.diffplug.spotless:spotless-plugin-gradle", version.ref = "spotless" }
+detektGradlePlugin = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
+
+[bundles]
+voyager = [
+    "voyager-navigator",
+    "voyager-screenModel",
+    "voyager-tabNavigator",
+    "voyager-transitions",
+    "voyager-lifecycle-kmp",
+    "voyager-koin"
+]
+
+ktor = [
+    "ktor-client",
+    "ktor-client-auth",
+    "ktor-logging",
+    "ktor-content-negotiation",
+    "ktor-serialization-json",
+    "logback-classic"
+]
+
+koin = [
+    "koin-core",
+    "koin-compose",
+    "koin-compose-viewmodel",
+    "koin-compose-viewmodel-navigation"
+]
+
+plugins = [
+    "androidGradlePlugin",
+    "kotlinGradlePlugin",
+    "kotlinxSerializationGradlePlugin",
+    "composeCompilerGradlePlugin",
+    "composeGradlePlugin",
+    "spotlessGradlePlugin",
+    "detektGradlePlugin"
+]
+
+[plugins]
+androidApplication = { id = "com.android.application", version.ref = "agp" }
+androidLibrary = { id = "com.android.library", version.ref = "agp" }
+jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
+composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+googleServices = { id = "com.google.gms.google-services", version.ref = "gms" }
+spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+jetbrainsKotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
