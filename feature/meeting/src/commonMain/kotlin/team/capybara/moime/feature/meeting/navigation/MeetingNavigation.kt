@@ -38,9 +38,9 @@ fun NavGraphBuilder.meetingScreen(
     onNavigateToBack: () -> Unit
 ) {
     composable<MeetingRoute> { backStackEntry ->
+        val meetingRoute: MeetingRoute = backStackEntry.toRoute()
         MeetingScreen(
-            viewModel = MeetingViewModel(backStackEntry.toRoute()),
-            onNavigateToCamera = onNavigateToCamera,
+            viewModel = MeetingViewModel(meetingRoute) { onNavigateToCamera(meetingRoute.id) },
             onRefreshMeetingList = onRefreshMeetingList,
             onNavigateToFriendDetail = onNavigateToFriendDetail,
             onNavigateToBack = onNavigateToBack
