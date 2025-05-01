@@ -29,7 +29,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import team.capybara.moime.core.data.repository.UserRepository
+import team.capybara.moime.core.data.repository.api.UserRepository
 import team.capybara.moime.core.ui.jsbridge.APP_VERSION
 import team.capybara.moime.core.ui.jsbridge.ImagePickerHandler
 import team.capybara.moime.feature.mypage.jsbridge.AppVersionJsCallback

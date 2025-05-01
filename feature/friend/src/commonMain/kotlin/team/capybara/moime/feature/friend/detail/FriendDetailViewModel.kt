@@ -44,8 +44,8 @@ import moime.feature.friend.generated.resources.unblock
 import moime.feature.friend.generated.resources.unblock_friend_dialog
 import moime.feature.friend.generated.resources.unblock_friend_dialog_desc
 import org.jetbrains.compose.resources.getString
-import team.capybara.moime.core.data.repository.FriendRepository
-import team.capybara.moime.core.data.repository.MeetingRepository
+import team.capybara.moime.core.data.repository.api.FriendRepository
+import team.capybara.moime.core.data.repository.api.MeetingRepository
 import team.capybara.moime.core.designsystem.component.DialogRequest
 import team.capybara.moime.core.model.Friend
 import team.capybara.moime.feature.friend.FriendViewModel

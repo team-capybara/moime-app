@@ -32,7 +32,7 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import org.koin.dsl.module
 import team.capybara.moime.core.common.model.BearerTokenStorage
-import team.capybara.moime.data.network.Api
+import team.capybara.moime.data.network.ktor.Api
 
 val networkModule = module {
     single {

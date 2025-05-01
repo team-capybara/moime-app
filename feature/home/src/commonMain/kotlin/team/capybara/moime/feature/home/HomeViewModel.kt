@@ -22,7 +22,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDate
-import team.capybara.moime.core.data.repository.MeetingRepository
+import team.capybara.moime.core.data.repository.api.MeetingRepository
 import team.capybara.moime.core.model.Meeting
 
 internal class HomeViewModel(

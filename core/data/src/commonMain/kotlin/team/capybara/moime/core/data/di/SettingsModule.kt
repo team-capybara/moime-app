@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 
-package team.capybara.moime.core.data.repository
+package team.capybara.moime.core.data.di
 
-interface CameraRepository {
+import com.russhwolf.settings.Settings
+import org.koin.dsl.module
 
-    suspend fun uploadImage(meetingId: Long, image: ByteArray): Result<Unit>
+val settingsModule = module {
+    single { Settings() }
 }

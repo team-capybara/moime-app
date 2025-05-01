@@ -30,7 +30,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import team.capybara.moime.core.common.di.ScopeProvider
-import team.capybara.moime.core.data.repository.UserRepository
+import team.capybara.moime.core.data.repository.api.UserRepository
 import team.capybara.moime.core.ui.jsbridge.ImagePickerHandler
 import team.capybara.moime.core.ui.jsbridge.WEB_VIEW_BASE_URL
 import team.capybara.moime.core.ui.jsbridge.WEB_VIEW_COOKIE_DOMAIN

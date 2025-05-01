@@ -14,15 +14,18 @@
  * limitations under the License.
  */
 
-package team.capybara.moime.core.data.repository
+package team.capybara.moime.core.data.repository.impl
 
-import team.capybara.moime.core.model.InsightSummary
-import team.capybara.moime.core.model.Survey
+import team.capybara.moime.core.data.repository.api.UserRepository
+import team.capybara.moime.data.network.MoimeNetworkDataSource
 
-interface InsightRepository {
-    suspend fun getInsightSummary(): Result<InsightSummary>
+internal class DefaultUserRepository(
+    private val dataSource: MoimeNetworkDataSource
+) : UserRepository {
 
-    suspend fun getSurvey(): Result<Survey>
+    override suspend fun getUser() = dataSource.getUser()
 
-    suspend fun postSurvey(): Result<Unit>
+    override suspend fun login(accessToken: String) = dataSource.login(accessToken)
+    
+    override suspend fun logout() = dataSource.logout()
 }

@@ -14,31 +14,182 @@
  * limitations under the License.
  */
 
-package team.capybara.moime.data.network.repository
+package team.capybara.moime.data.network.ktor
 
+import com.russhwolf.settings.Settings
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
+import io.ktor.client.plugins.auth.authProviders
+import io.ktor.client.plugins.auth.providers.BearerAuthProvider
+import io.ktor.client.plugins.auth.providers.BearerTokens
+import io.ktor.client.request.forms.formData
+import io.ktor.client.request.forms.submitFormWithBinaryData
 import io.ktor.client.request.get
+import io.ktor.client.request.post
+import io.ktor.client.request.put
+import io.ktor.http.Headers
+import io.ktor.http.HttpHeaders
+import kotlinx.datetime.Clock
 import kotlinx.datetime.DatePeriod
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.plus
+import team.capybara.moime.core.common.ACCESS_TOKEN_KEY
+import team.capybara.moime.core.common.model.BearerTokenStorage
 import team.capybara.moime.core.common.model.CursorData
 import team.capybara.moime.core.common.model.CursorRequest
 import team.capybara.moime.core.common.util.DateUtil.toApiFormat
 import team.capybara.moime.core.common.util.DateUtil.toIsoDateTimeFormat
-import team.capybara.moime.core.data.repository.MeetingRepository
+import team.capybara.moime.core.model.Friend
+import team.capybara.moime.core.model.InsightSummary
 import team.capybara.moime.core.model.Meeting
-import team.capybara.moime.data.network.Api
+import team.capybara.moime.core.model.Survey
+import team.capybara.moime.core.model.User
+import team.capybara.moime.data.network.MoimeNetworkDataSource
 import team.capybara.moime.data.network.model.ApiException
+import team.capybara.moime.data.network.model.FriendListResponse
+import team.capybara.moime.data.network.model.FriendResponse
+import team.capybara.moime.data.network.model.InsightSummaryResponse
 import team.capybara.moime.data.network.model.MeetingCountPerMonthResponse
 import team.capybara.moime.data.network.model.MeetingCountResponse
 import team.capybara.moime.data.network.model.MeetingDateResponse
 import team.capybara.moime.data.network.model.MeetingResponse
+import team.capybara.moime.data.network.model.SurveyResponse
+import team.capybara.moime.data.network.model.UserResponse
+import team.capybara.moime.data.network.model.toUser
 
-class DefaultMeetingRepository(
-    private val httpClient: HttpClient
-) : MeetingRepository {
+internal class KtorMoimeNetwork(
+    private val httpClient: HttpClient,
+    private val settings: Settings,
+    private val bearerTokenStorage: BearerTokenStorage
+) : MoimeNetworkDataSource {
+
+    override suspend fun uploadImage(meetingId: Long, image: ByteArray): Result<Unit> =
+        runCatching {
+            httpClient.submitFormWithBinaryData(
+                url = Api.MOIMS_PHOTO(meetingId),
+                formData = formData {
+                    append("file", image, Headers.build {
+                        append(HttpHeaders.ContentType, "image/jpg")
+                        append(
+                            HttpHeaders.ContentDisposition,
+                            "filename=\"$meetingId-${Clock.System.now()}.jpg\""
+                        )
+                    })
+                }
+            ).also { if (it.status.value != 200) throw ApiException(it.status) }
+        }
+
+    override suspend fun getMyFriendsCount(): Result<Int> = runCatching {
+        httpClient.get(Api.FRIENDS_COUNT).body<Int>()
+    }
+
+    override suspend fun getMyFriends(
+        cursor: CursorRequest,
+        nickname: String?
+    ): Result<CursorData<Friend>> = runCatching {
+        httpClient.get(Api.FRIENDS_FOLLOWINGS) {
+            url {
+                with(cursor) {
+                    cursorId?.let { parameters.append("cursorId", it.toString()) }
+                    limit?.let { parameters.append("size", it.toString()) }
+                }
+                nickname?.let { parameters.append("keyword", it) }
+            }
+        }.body<FriendListResponse>().run {
+            CursorData(
+                data = data.map { it.toUiModel() },
+                nextCursorId = cursorId?.cursorId,
+                isLast = last
+            )
+        }
+    }
+
+    override suspend fun getRecommendedFriends(
+        cursor: CursorRequest,
+        nickname: String?
+    ): Result<CursorData<Friend>> = runCatching {
+        httpClient.get(Api.FRIENDS_RECOMMENDED) {
+            url {
+                with(cursor) {
+                    cursorId?.let { parameters.append("cursorId", it.toString()) }
+                    limit?.let { parameters.append("size", it.toString()) }
+                }
+                nickname?.let { parameters.append("keyword", it) }
+            }
+        }.body<FriendListResponse>().run {
+            CursorData(
+                data = data.map { it.toUiModel() },
+                nextCursorId = cursorId?.cursorId,
+                isLast = last
+            )
+        }
+    }
+
+    override suspend fun getStranger(code: String): Result<Friend> = runCatching {
+        httpClient.get(Api.USERS_FIND_CODE(code)) {
+            url { parameters.append("userCode", code) }
+        }.body<FriendResponse>().toUiModel()
+    }
+
+    override suspend fun getStranger(targetId: Long): Result<Friend> = runCatching {
+        httpClient.get(Api.USERS_FIND_ID(targetId)) {
+            url { parameters.append("userId", targetId.toString()) }
+        }.body<FriendResponse>().toUiModel()
+    }
+
+    override suspend fun addFriend(targetId: Long): Result<Unit> = runCatching {
+        httpClient.post(Api.FRIENDS_ADD) {
+            url { parameters.append("targetId", targetId.toString()) }
+        }.also { if (it.status.value != 200) throw ApiException(it.status) }
+    }
+
+    override suspend fun getBlockedFriendsCount(): Result<Int> = runCatching {
+        httpClient.get(Api.FRIENDS_BLOCKED_COUNT).body<Int>()
+    }
+
+    override suspend fun getBlockedFriends(
+        cursor: CursorRequest
+    ): Result<CursorData<Friend>> = runCatching {
+        httpClient.get(Api.FRIENDS_BLOCKED) {
+            url {
+                with(cursor) {
+                    cursorId?.let { parameters.append("cursorId", it.toString()) }
+                    limit?.let { parameters.append("size", it.toString()) }
+                }
+            }
+        }.body<FriendListResponse>().run {
+            CursorData(
+                data = data.map { it.toUiModel() },
+                nextCursorId = cursorId?.cursorId,
+                isLast = last
+            )
+        }
+    }
+
+    override suspend fun blockFriend(targetId: Long): Result<Unit> = runCatching {
+        httpClient.put(Api.FRIENDS_BLOCK) {
+            url { parameters.append("targetId", targetId.toString()) }
+        }.also { if (it.status.value != 200) throw ApiException(it.status) }
+    }
+
+    override suspend fun unblockFriend(targetId: Long): Result<Unit> = runCatching {
+        httpClient.put(Api.FRIENDS_UNBLOCK) {
+            url { parameters.append("targetId", targetId.toString()) }
+        }.also { if (it.status.value != 200) throw ApiException(it.status) }
+    }
+
+    override suspend fun getInsightSummary(): Result<InsightSummary> = runCatching {
+        httpClient.get(Api.WEEKLY_SUMMARY).body<InsightSummaryResponse>().toUiModel()
+    }
+
+    override suspend fun getSurvey(): Result<Survey> = runCatching {
+        httpClient.get(Api.SURVEY_FRIEND_STATS).body<SurveyResponse>().toUiModel()
+    }
+
+    override suspend fun postSurvey(): Result<Unit> = runCatching {
+        httpClient.post(Api.SURVEY_FRIEND_STATS)
+    }
 
     override suspend fun getAllMeetings(): Result<List<Meeting>> = runCatching {
         listOf(
@@ -238,6 +389,35 @@ class DefaultMeetingRepository(
                 throw ApiException(status)
             } else {
                 body<MeetingCountPerMonthResponse>().count
+            }
+        }
+    }
+
+    override suspend fun hasUnreadNotification(): Result<Boolean> = runCatching {
+        httpClient.get(Api.NOTIFICATION_EXIST).run {
+            if (status.value != 200) {
+                throw ApiException(status)
+            } else {
+                body<Boolean>()
+            }
+        }
+    }
+
+    override suspend fun getUser(): Result<User> = runCatching {
+        httpClient.get(Api.USERS_MY).body<UserResponse>().toUser()
+    }
+
+    override suspend fun login(accessToken: String): Result<Unit> = runCatching {
+        settings.putString(ACCESS_TOKEN_KEY, accessToken)
+        bearerTokenStorage.add(BearerTokens(accessToken, null))
+    }
+
+    override suspend fun logout(): Result<Unit> = runCatching {
+        settings.remove(ACCESS_TOKEN_KEY)
+        bearerTokenStorage.clear()
+        httpClient.authProviders.forEach {
+            if (it is BearerAuthProvider) {
+                it.clearToken()
             }
         }
     }
