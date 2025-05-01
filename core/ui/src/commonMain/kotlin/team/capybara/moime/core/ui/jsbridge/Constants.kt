@@ -18,4 +18,4 @@ package team.capybara.moime.core.ui.jsbridge
 
 const val WEB_VIEW_BASE_URL = "https://www.moime.app/"
 const val WEB_VIEW_COOKIE_DOMAIN = "moime.app"
-const val APP_VERSION = "1.2.1"
+const val APP_VERSION = "2.0.1"
