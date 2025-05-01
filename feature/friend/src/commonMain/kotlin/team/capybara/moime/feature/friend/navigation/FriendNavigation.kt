@@ -21,14 +21,11 @@ import androidx.navigation.compose.composable
 import kotlinx.serialization.Serializable
 import org.koin.compose.viewmodel.koinViewModel
 import team.capybara.moime.core.model.Meeting
-import team.capybara.moime.core.model.User
-import team.capybara.moime.core.ui.util.NavigationUtil.serializableType
 import team.capybara.moime.feature.friend.FriendScreen
 import team.capybara.moime.feature.friend.FriendViewModel
 import team.capybara.moime.feature.friend.blocklist.FriendBlockListScreen
 import team.capybara.moime.feature.friend.detail.FriendDetailScreen
 import team.capybara.moime.feature.friend.detail.FriendDetailViewModel
-import kotlin.reflect.typeOf
 
 @Serializable
 data class FriendRoute(val userCode: String, val userProfileImageUrl: String)
@@ -46,9 +43,7 @@ fun NavGraphBuilder.friendScreen(
     onNavigateToMeetingCreate: () -> Unit,
     onNavigateToMeetingDetail: (Meeting) -> Unit
 ) {
-    composable<FriendRoute>(
-        typeMap = mapOf(typeOf<User>() to serializableType<User>())
-    ) { backStackEntry ->
+    composable<FriendRoute> {
         FriendScreen(
             viewModel = koinViewModel<FriendViewModel>(),
             onNavigateToBack = onNavigateToBack,
